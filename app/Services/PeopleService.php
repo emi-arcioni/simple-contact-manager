@@ -18,12 +18,7 @@ class PeopleService implements PeopleServiceInterface
 
     public function request($type, $url, $data = [])
     {
-        $user_settings = Setting::where('user_id', auth()->user()->id)->first();
-        if (!empty($user_settings)) {
-            $api_key = $user_settings->content['klaviyo_api'];
-        } else {
-            $api_key = '';
-        }
+        $api_key = Setting::privateApiKey();
 
         // workaround due to klaviyo inconsistency of passing the api_key parameter depending of its version
         if (substr($url, 0, 2) == 'v1') {

@@ -16,7 +16,7 @@
             </div>
             @if (!env('KLAVIYO_URL'))
                 <div class="alert alert-warning">
-                    In order of the correct functionality of Contracts section, you must define <strong>KLAVIYO_URL</strong> variable in your <strong>.env</strong> file
+                    In order to the correct functionality of this app, you must define <strong>KLAVIYO_URL</strong> variable in your <strong>.env</strong> file
                 </div>
             @endif
             @if (!$api_key)

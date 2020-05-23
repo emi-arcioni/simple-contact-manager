@@ -214,6 +214,11 @@ return [
             'icon' => 'fas fa-fw fa-users',
         ],
         [
+            'text' => 'Track',
+            'url'  => 'track',
+            'icon' => 'fas fa-fw fa-wave-square',
+        ],
+        [
             'text' => 'Settings',
             'url'  => 'settings',
             'icon' => 'fas fa-fw fa-cog',

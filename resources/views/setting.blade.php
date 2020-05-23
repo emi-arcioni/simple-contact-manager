@@ -39,9 +39,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="APIKeyInput">Klaviyo API Key</label>
-                                    <input name="klaviyo_api" value="{{ old('klaviyo_api', optional($item)->content['klaviyo_api']) }}" type="text" class="form-control {{ $errors->get('klaviyo_api') ? 'is-invalid' : '' }}" id="APIKeyInput">
-                                    @error('klaviyo_api')
+                                    <label for="PrivateAPIKeyInput">Klaviyo Private API Key</label>
+                                    <input name="klaviyo_private" value="{{ old('klaviyo_private', optional($item)->content['klaviyo_private']) }}" type="text" class="form-control {{ $errors->get('klaviyo_private') ? 'is-invalid' : '' }}" id="PrivateAPIKeyInput">
+                                    @error('klaviyo_private')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div><!--form-group-->
+                            </div><!--col-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="PrivateAPIKeyInput">Klaviyo Public API Key</label>
+                                    <input name="klaviyo_public" value="{{ old('klaviyo_public', optional($item)->content['klaviyo_public']) }}" type="text" class="form-control {{ $errors->get('klaviyo_public') ? 'is-invalid' : '' }}" id="PrivateAPIKeyInput">
+                                    @error('klaviyo_public')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><!--form-group-->

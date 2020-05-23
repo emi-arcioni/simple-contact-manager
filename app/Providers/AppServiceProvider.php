@@ -4,8 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Interfaces\PeopleServiceInterface;
-use App\Services\PeopleService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(PeopleServiceInterface::class, PeopleService::class);
+        $this->app->bind(\App\Interfaces\PeopleServiceInterface::class, \App\Services\PeopleService::class);
+        $this->app->bind(\App\Interfaces\TrackServiceInterface::class, \App\Services\TrackService::class);
     }
 
     /**

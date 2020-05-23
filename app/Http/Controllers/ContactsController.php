@@ -15,7 +15,8 @@ class ContactsController extends CRUDController
     protected $form_data;
     protected $peopleService;
 
-    public function __construct(Contact $model, PeopleServiceInterface $peopleService) {
+    public function __construct(Contact $model, PeopleServiceInterface $peopleService) 
+    {
         $this->model = $model;
         $this->label = 'Contact';
         $this->peopleService = $peopleService;

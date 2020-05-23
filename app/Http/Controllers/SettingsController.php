@@ -12,7 +12,8 @@ class SettingsController extends CRUDController
     protected $form_validator_fields;
     protected $form_data;
 
-    public function __construct(Setting $model) {
+    public function __construct(Setting $model) 
+    {
         $this->model = $model;
         $this->label = 'Setting';
     }
@@ -26,12 +27,14 @@ class SettingsController extends CRUDController
     public function store(Request $request, $contact_id = NULL)
     {
         $this->form_validator_fields = [
-            'klaviyo_api' => ['required']
+            'klaviyo_private' => ['required'],
+            'klaviyo_public' => ['required'],
         ];
         $this->form_data = [
             'user_id' => auth()->user()->id,
             'content' => json_encode([
-                'klaviyo_api' => $request->input('klaviyo_api')
+                'klaviyo_private' => $request->input('klaviyo_private'),
+                'klaviyo_public' => $request->input('klaviyo_public')
             ])
         ];
 

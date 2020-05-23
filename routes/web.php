@@ -34,7 +34,13 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/contacts/{contact_id}', 'ContactsController@delete');
     // --
 
+    // -- Settings URLs --
     Route::get('/settings', 'SettingsController@form');
     Route::post('/settings', 'SettingsController@store');
     Route::put('/settings/{setting_id}', 'SettingsController@store');
+    // --
+
+    // -- Track URLs --
+    Route::get('/track', 'TrackController@index');
+    // --
 });
