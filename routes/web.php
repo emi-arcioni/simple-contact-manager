@@ -21,4 +21,16 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index');
+
+    // -- Contacts URLs --
+    Route::get('/contacts', 'ContactsController@index');
+
+    Route::post('/contacts', 'ContactsController@store');
+    Route::put('/contacts/{contact_id}', 'ContactsController@store');
+
+    Route::get('/contacts/new', 'ContactsController@form');
+    Route::get('/contacts/{contact_id}', 'ContactsController@form');
+
+    Route::delete('/contacts/{contact_id}', 'ContactsController@delete');
+    // --
 });

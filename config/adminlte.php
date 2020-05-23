@@ -207,7 +207,13 @@ return [
     |
     */
 
-    'menu' => [],
+    'menu' => [
+        [
+            'text' => 'Contacts',
+            'url'  => 'contacts',
+            'icon' => 'fas fa-fw fa-users',
+        ]
+    ],
 
     /*'menu' => [
         [
