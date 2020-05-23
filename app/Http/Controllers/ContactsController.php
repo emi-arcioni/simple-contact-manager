@@ -46,23 +46,33 @@ class ContactsController extends Controller
         ])->validate();
 
         if ($contact_id) {
-            Contact::where('id', $contact_id)->update([
+            if (Contact::where('user_id', auth()->user()->id)->where('id', $contact_id)->update([
                 'first_name' => $request->input('first_name'),
                 'email' => $request->input('email'),
                 'phone' => $request->has('phone') ? $request->input('phone') : NULL
-            ]);
-            $message = 'The contact has been succesfully updated';
+            ])) {
+                $message = 'The contact has been succesfully updated';
+                $type = 'success';
+            } else {
+                $message = 'The contact has not been updated';
+                $type = 'danger';
+            }            
         } else {
-            Contact::create([
+            if (Contact::create([
                 'user_id' => auth()->user()->id,
                 'first_name' => $request->input('first_name'),
                 'email' => $request->input('email'),
                 'phone' => $request->has('phone') ? $request->input('phone') : NULL
-            ]);
-            $message = 'The contact has been succesfully created';
+            ])) {
+                $message = 'The contact has been succesfully created';
+                $type = 'success';
+            } else {
+                $message = 'The contact has not been created';
+                $type = 'danger';
+            }
         }
 
-        return redirect('/contacts')->with('success', $message);
+        return redirect('/contacts')->with($type, $message);
     }
 
     public function delete(Request $request, $contact_id)
