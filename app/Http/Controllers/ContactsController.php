@@ -95,18 +95,17 @@ class ContactsController extends CRUDController
 
         DB::beginTransaction();
 
+        $contacts_to_sync = array_chunk($contacts_to_sync, 100);
         Contact::insert($contacts_to_add);
-        $external_users = $this->peopleService->create($contacts_to_sync);
-        array_map(function($external_user) {
-            Contact::where('email', $external_user->email)->update(['external_id' => $external_user->id]);
-        }, $external_users);
+        foreach($contacts_to_sync as $contacts_chunk) {
+            $external_users = $this->peopleService->create($contacts_chunk);
+            array_map(function($external_user) {
+                Contact::where('email', $external_user->email)->update(['external_id' => $external_user->id]);
+            }, $external_users);
+        }
 
         DB::commit();
 
-        $view_data = [
-            'total_uploaded' => count($contacts_to_add)
-        ];
-
-        return view('upload', $view_data);
+        return redirect('/contacts/upload')->with('success', count($contacts_to_add) . ' contacts has been created and synced');
     }
 }
