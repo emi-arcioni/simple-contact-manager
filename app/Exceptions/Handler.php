@@ -4,6 +4,9 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Psr7;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +53,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof ClientException) {
+            return back()->withInput()->with('danger', Psr7\str($exception->getResponse()));
+        }
+        if ($exception instanceof ConnectException) {
+            return back()->withInput()->with('danger', $exception->getMessage());
+        }
         return parent::render($request, $exception);
     }
 }

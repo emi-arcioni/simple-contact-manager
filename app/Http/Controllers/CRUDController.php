@@ -12,6 +12,7 @@ class CRUDController extends Controller
     protected $label;
     protected $form_validator_fields;
     protected $form_data;
+    protected $item;
 
     public function index(Request $request) 
     {
@@ -42,30 +43,28 @@ class CRUDController extends Controller
     {
         Validator::make($request->all(), $this->form_validator_fields)->validate();
 
-        if ($item_id) {
-            if ($this->model->where('user_id', auth()->user()->id)->where('id', $item_id)->update($this->form_data)) {
-                $message = 'The ' . mb_strtolower($this->label) . ' has been succesfully updated';
-                $type = 'success';
-            } else {
-                $message = 'The ' . mb_strtolower($this->label) . ' has not been updated';
-                $type = 'danger';
-            }            
+        $item = $this->model->updateOrCreate(
+            ['id' => $item_id, 'user_id' => auth()->user()->id],
+            $this->form_data
+        );
+        if ($item->wasRecentlyCreated) {
+            $message = 'The ' . mb_strtolower($this->label) . ' has been succesfully created';
+            $type = 'success';
         } else {
-            if ($this->model->create($this->form_data)) {
-                $message = 'The ' . mb_strtolower($this->label) . ' has been succesfully created';
-                $type = 'success';
-            } else {
-                $message = 'The ' . mb_strtolower($this->label) . ' has not been created';
-                $type = 'danger';
-            }
+            $message = 'The ' . mb_strtolower($this->label) . ' has been succesfully updated';
+            $type = 'success';
         }
+
+        $this->item = $item;
 
         return redirect('/' . Str::plural(mb_strtolower($this->label)))->with($type, $message);
     }
 
     public function delete(Request $request, $item_id)
     {
-        $this->model->where('user_id', auth()->user()->id)->where('id', $item_id)->delete();
+        $item = $this->model->where('user_id', auth()->user()->id)->where('id', $item_id)->firstOrFail();
+        $this->item = $item;
+        $item->delete();
 
         return redirect('/' . Str::plural(mb_strtolower($this->label)))->with('success', 'The ' . mb_strtolower($this->label) . ' has been succesfully removed');
     }
