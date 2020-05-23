@@ -67,7 +67,7 @@ class ContactsController extends Controller
 
     public function delete(Request $request, $contact_id)
     {
-        Contact::where('id', $contact_id)->delete();
+        Contact::where('user_id', auth()->user()->id)->where('id', $contact_id)->delete();
 
         return redirect('/contacts')->with('success', 'The contact has been succesfully removed');
     }
