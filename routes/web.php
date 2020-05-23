@@ -33,4 +33,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/contacts/{contact_id}', 'ContactsController@delete');
     // --
+
+    Route::get('/settings', 'SettingsController@form');
+    Route::post('/settings', 'SettingsController@store');
+    Route::put('/settings/{setting_id}', 'SettingsController@store');
 });

@@ -212,6 +212,11 @@ return [
             'text' => 'Contacts',
             'url'  => 'contacts',
             'icon' => 'fas fa-fw fa-users',
+        ],
+        [
+            'text' => 'Settings',
+            'url'  => 'settings',
+            'icon' => 'fas fa-fw fa-cog',
         ]
     ],
 
