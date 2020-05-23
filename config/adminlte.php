@@ -207,23 +207,7 @@ return [
     |
     */
 
-    'menu' => [
-        [
-            'text' => 'Contacts',
-            'url'  => 'contacts',
-            'icon' => 'fas fa-fw fa-users',
-        ],
-        [
-            'text' => 'Track',
-            'url'  => 'track',
-            'icon' => 'fas fa-fw fa-wave-square',
-        ],
-        [
-            'text' => 'Settings',
-            'url'  => 'settings',
-            'icon' => 'fas fa-fw fa-cog',
-        ]
-    ],
+    'menu' => [],
 
     /*'menu' => [
         [
@@ -418,5 +402,16 @@ return [
                 ],
             ],
         ],
+        [
+            'name' => 'CustomFileInput',
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js',
+                ],
+            ]
+        ]
     ],
 ];

@@ -8,6 +8,9 @@
             <h1 class="m-0 text-dark">Contacts</h1>
         </div>
         <div class="col-auto">
+            <a class="btn btn-outline-primary" href="/contacts/upload"><i class="fas fa-file-csv"></i> Upload CSV</a>
+        </div>
+        <div class="col-auto">
             <a class="btn btn-primary" href="/contacts/new">Add new contact</a>
         </div>
     </div>

@@ -27,8 +27,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/contacts', 'ContactsController@store');
     Route::put('/contacts/{contact_id}', 'ContactsController@store');
+    Route::post('/contacts/upload', 'ContactsController@formUploadProcess');
 
     Route::get('/contacts/new', 'ContactsController@form');
+    Route::get('/contacts/upload', 'ContactsController@formUpload');
     Route::get('/contacts/{contact_id}', 'ContactsController@form');
 
     Route::delete('/contacts/{contact_id}', 'ContactsController@delete');

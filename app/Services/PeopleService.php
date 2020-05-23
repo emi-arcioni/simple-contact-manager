@@ -36,12 +36,15 @@ class PeopleService implements PeopleServiceInterface
         $list_id = $this->getListId();
 
         // -- Setup of the array of contacts that will be sent to Klaviyo endpoint
-        $profiles = array_map(function(Contact $contact) {
-            return [
+        $profiles = array_map(function($contact) {
+            $return = [
                 'first_name' => $contact->first_name,
-                'email' => $contact->email,
-                'phone_number' => $contact->phone
+                'email' => $contact->email
             ];
+            if (!empty($contact->phone)) {
+                $return['phone_number'] = $contact->phone;
+            }
+            return $return;
         }, $contacts);
 
         $response = $this->request('POST', 'v2/list/' . $list_id . '/members' , [
