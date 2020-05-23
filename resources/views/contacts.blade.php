@@ -33,7 +33,7 @@
 
     <div class="row">
         <div class="col-12">
-            @if (count($contacts) > 0)
+            @if (count($items) > 0)
             <div class="card">
                 <div class="card-body p-0">
                     <table class="table">
@@ -47,7 +47,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($contacts as $contact)
+                            @foreach($items as $contact)
                             <tr>
                                 <td class="align-middle">{{ $contact['first_name'] }}</td>
                                 <td class="align-middle">{{ $contact['email'] }}</td>
